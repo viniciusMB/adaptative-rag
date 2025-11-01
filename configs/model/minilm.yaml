@@ -1,0 +1,17 @@
+# @package _global_
+
+model:
+  name: all-MiniLM-L6-v2
+  type: sentence-transformer
+  
+  # Encoding parameters
+  batch_size: 64
+  max_length: 512
+  normalize_embeddings: true
+  
+  # Device
+  device: ${device}
+  
+  # Model cache
+  cache_folder: ${paths.cache_dir}/models
+

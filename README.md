@@ -1,54 +1,195 @@
-### Goal
+# Adaptive RAG: Intelligent Retrieval System
 
-Build an intelligent retrieval system that adapts to the query — dynamic chunking, hybrid retrieval, and reranking — achieving measurable gains in precision and latency.
+## 🎯 Project Goal
 
-### Outcome
+Build an **intelligent retrieval system that adapts to queries** using dynamic chunking, hybrid retrieval, and reranking to achieve measurable improvements in both precision and latency.
 
-A modular RAG pipeline benchmarked on accuracy, speed, and efficiency; reproducible and production-ready.
+## 🏆 Target Outcome
 
-### Milestone 1 — Retrieval Foundations
+A **modular, production-ready RAG (Retrieval-Augmented Generation) pipeline** that is:
+- Benchmarked on accuracy, speed, and efficiency
+- Reproducible and well-documented
+- Adaptable to different query types and use cases
 
-- **Tasks**
-    - Set up repository, config system, and data loaders.
-    - Ingest corpus, clean, and prepare metadata.
-    - Implement basic dense retrieval pipeline (embeddings + vector DB).
-- **Tools**: `sentence-transformers`, `FAISS` / `Qdrant`, `Hydra`, `Poetry`, `DVC`, `W&B`
-- **Deliverable**: Baseline retrieval pipeline and evaluation script (Recall@k, nDCG)
+## 💡 Use Cases
 
-### Milestone 2 — Dynamic Chunking Engine
+This system is designed for scenarios where you need to:
 
-- **Tasks**
-    - Implement adaptive chunker: query-based length, semantic boundaries.
-    - Cache and profile different chunking strategies.
-- **Tools**: `tiktoken`, `spacy`, `nltk`, custom `LangChain` splitters
-- **Deliverable**: Dynamic chunking component with benchmark results
+1. **Question Answering Systems**: Find the most relevant documents to answer user questions
+   - Customer support chatbots
+   - Internal knowledge base search
+   - Research paper retrieval
 
-### Milestone 3 — Hybrid Retrieval Layer
+2. **Semantic Search**: Go beyond keyword matching to understand query intent
+   - E-commerce product search
+   - Legal document retrieval
+   - Medical literature search
 
-- **Tasks**
-    - Add sparse retrieval (BM25/TF-IDF).
-    - Fuse with dense results via reciprocal rank fusion or learned weights.
-- **Tools**: `Elasticsearch` / `OpenSearch`, `rank-bm25`, `scikit-learn`
-- **Deliverable**: Dual-mode retriever with hybrid weighting module
+3. **RAG Applications**: Provide relevant context to LLMs for better responses
+   - AI assistants with company knowledge
+   - Code search and documentation
+   - Academic research helpers
 
-### Milestone 4 — Re-Ranker & Adaptive Policy
+## 🚀 Quick Start
 
-- **Tasks**
-    - Integrate cross-encoder reranker.
-    - Build adaptive policy (ML or heuristic) to decide reranking, k, and chunk size.
-- **Tools**: `cross-encoder/ms-marco`, `bge-reranker`, `scikit-learn`, `Ray Tune`
-- **Deliverable**: Policy-driven retriever with reranker on/off decisions
+### Installation
 
-### Milestone 5 — Benchmark & Optimization
+```bash
+# Install dependencies with Poetry
+poetry install
 
-- **Tasks**
-    - Design evaluation harness and latency tests.
-    - Profile p50/p95 latency across configs.
-    - Visualize trade-offs in dashboard.
-- **Tools**: `ragas`, `Locust`, `Prometheus`, `Grafana`, `pytest`
-- **Deliverable**: Quality vs latency dashboard; final report
+# Or with pip (if not using Poetry)
+pip install -e .
+```
 
-### Success Criteria
+### Basic Usage
+
+```bash
+# 1. Build the search index (downloads MS MARCO and creates embeddings)
+python scripts/build_index.py
+
+# 2. Evaluate the retrieval system
+python scripts/evaluate.py
+
+# 3. Try interactive search
+python scripts/retrieve.py
+```
+
+## 📊 Project Milestones
+
+### ✅ Milestone 1 — Retrieval Foundations (Current)
+
+**What**: Build a baseline dense retrieval system using semantic embeddings.
+
+**Why**: Establish a solid foundation and baseline metrics before adding complexity.
+
+**Deliverable**: 
+- Working retrieval pipeline with FAISS vector database
+- Evaluation metrics (Recall@k, nDCG)
+- Baseline performance benchmarks
+
+**[See detailed documentation →](docs/MILESTONE_1.md)**
+
+### 🔜 Milestone 2 — Dynamic Chunking Engine
+
+Implement adaptive text chunking based on query characteristics and semantic boundaries.
+
+### 🔜 Milestone 3 — Hybrid Retrieval Layer
+
+Combine dense (semantic) and sparse (keyword) retrieval methods for better coverage.
+
+### 🔜 Milestone 4 — Re-Ranker & Adaptive Policy
+
+Add cross-encoder reranking and intelligent decision-making for when to use different strategies.
+
+### 🔜 Milestone 5 — Benchmark & Optimization
+
+Comprehensive evaluation with latency profiling and visualization dashboard.
+
+## 📈 Success Criteria
 
 - ≥ 15% improvement in nDCG@10 over dense baseline
-- Median latency ≤ 500 ms with rerank enabled
+- Median latency ≤ 500ms with rerank enabled
+- Modular, maintainable codebase
+
+## 📁 Project Structure
+
+```
+adaptative-rag/
+├── configs/                    # Hydra configuration files
+│   ├── config.yaml            # Main config
+│   ├── data/                  # Dataset configs
+│   ├── model/                 # Model configs
+│   └── retrieval/             # Retrieval configs
+├── src/                       # Source code
+│   ├── data/                  # Data loading and preprocessing
+│   ├── retrieval/             # Retrieval components
+│   ├── evaluation/            # Metrics and evaluation
+│   └── utils/                 # Shared utilities
+├── scripts/                   # Entry point scripts
+│   ├── build_index.py         # Build search index
+│   ├── evaluate.py            # Run evaluation
+│   └── retrieve.py            # Interactive search
+├── tests/                     # Unit tests
+├── docs/                      # Documentation
+└── data/                      # Data storage (created on first run)
+```
+
+## 🛠️ Technology Stack
+
+### Core Libraries
+- **sentence-transformers**: Neural text embeddings
+- **FAISS**: Fast similarity search
+- **Hydra**: Configuration management
+- **Poetry**: Dependency management
+
+### Dataset
+- **MS MARCO**: Microsoft MAchine Reading COmprehension dataset
+  - ~8.8M passages
+  - ~6.9k evaluation queries
+  - Industry-standard benchmark
+
+## 📖 Documentation
+
+- **[Milestone 1 Guide](docs/MILESTONE_1.md)**: Detailed walkthrough of the current system
+- **[Architecture](docs/ARCHITECTURE.md)**: System design and components
+- **[Configuration](docs/CONFIGURATION.md)**: How to customize settings
+
+## 🧪 Running Tests
+
+```bash
+# Run all tests
+poetry run pytest
+
+# Run with coverage
+poetry run pytest --cov=src
+
+# Run specific test file
+poetry run pytest tests/test_metrics.py
+```
+
+## 📝 Development
+
+### Code Quality
+
+```bash
+# Format code
+poetry run black src/ tests/
+
+# Lint code
+poetry run ruff check src/ tests/
+```
+
+### Configuration
+
+All settings are managed through Hydra configs in `configs/`. You can:
+- Override any parameter from command line
+- Create new config variants
+- Compose multiple configs
+
+Example:
+```bash
+# Use different model
+python scripts/build_index.py model.name=all-mpnet-base-v2
+
+# Change top_k results
+python scripts/evaluate.py retrieval.top_k=20
+```
+
+## 🤝 Contributing
+
+This is a learning/research project. Feel free to:
+- Experiment with different models
+- Add new evaluation metrics
+- Optimize performance
+- Improve documentation
+
+## 📄 License
+
+MIT License - See LICENSE file for details
+
+## 🙏 Acknowledgments
+
+- MS MARCO dataset by Microsoft
+- sentence-transformers by UKP Lab
+- FAISS by Facebook Research

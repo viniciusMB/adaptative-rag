@@ -1,0 +1,21 @@
+defaults:
+  - data: msmarco
+  - model: minilm
+  - retrieval: dense
+  - _self_
+
+# Project paths
+paths:
+  data_dir: data
+  output_dir: outputs
+  cache_dir: ${paths.data_dir}/cache
+
+# Logging
+logging:
+  level: INFO
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Runtime
+device: cpu  # or "cuda" if GPU available
+seed: 42
+

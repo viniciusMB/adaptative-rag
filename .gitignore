@@ -1,25 +1,81 @@
-# If you prefer the allow list template instead of the deny list, see community template:
-# https://github.com/github/gitignore/blob/main/community/Golang/Go.AllowList.gitignore
-#
-# Binaries for programs and plugins
-*.exe
-*.exe~
-*.dll
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
 *.so
-*.dylib
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
 
-# Test binary, built with `go test -c`
-*.test
+# Virtual Environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
 
-# Output of the go coverage tool, specifically when used with LiteIDE
-*.out
+# Poetry
+poetry.lock
 
-# Dependency directories (remove the comment below to include it)
-# vendor/
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
 
-# Go workspace file
-go.work
-go.work.sum
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
 
-# env file
-.env
+# Hydra
+outputs/
+multirun/
+.hydra/
+
+# Data and Models
+data/
+*.faiss
+*.pkl
+*.npy
+*.parquet
+*.csv
+*.tsv
+
+# Logs
+*.log
+logs/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Ruff
+.ruff_cache/
+
+# OS
+Thumbs.db
+.DS_Store

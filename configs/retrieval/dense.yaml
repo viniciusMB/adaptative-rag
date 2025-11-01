@@ -1,0 +1,20 @@
+# @package _global_
+
+retrieval:
+  type: dense
+  
+  # FAISS parameters
+  index_type: IndexFlatIP  # Inner product for normalized embeddings
+  metric_type: METRIC_INNER_PRODUCT
+  
+  # Retrieval parameters
+  top_k: 10
+  k_values: [1, 5, 10, 20]  # For Recall@k evaluation
+  
+  # Index paths
+  index_path: ${paths.output_dir}/faiss_index
+  doc_ids_path: ${paths.output_dir}/doc_ids.pkl
+  
+  # Search parameters
+  search_batch_size: 32
+
